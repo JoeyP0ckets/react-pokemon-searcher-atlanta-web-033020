@@ -6,7 +6,6 @@ class PokemonCard extends React.Component {
   constructor() {
     super()
     this.state = {
-      isLoading: true,
       cardFront: true
     }
   }
@@ -18,8 +17,8 @@ class PokemonCard extends React.Component {
   }
   
   render() {
-    console.log(this.props)
-    console.log(this.state)
+    // console.log(this.props)
+    // console.log(this.state)
     return (
       <Card onClick={this.handleClick}>
         <div>

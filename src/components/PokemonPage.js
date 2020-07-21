@@ -8,9 +8,12 @@ import FuzzySearch from 'fuzzy-search'
 class PokemonPage extends React.Component {
   
   state = {
-    isLoading: true,
     pokemonData: [],
-    searchedPokemon: []
+    searchedPokemon: [],
+    name: '',
+    hp: '',
+    front: '',
+    back: ''
   }
   
   componentDidMount() {
@@ -19,7 +22,6 @@ class PokemonPage extends React.Component {
       .then(resp => resp.json())
       .then(data => {
         this.setState({
-          isLoading: false,
           pokemonData: data,
           searchedPokemon: data
         })
@@ -33,14 +35,50 @@ class PokemonPage extends React.Component {
       searchedPokemon: result
     })
   }
+
+  handleChange = event => {
+     this.setState({
+       [event.target.name]: event.target.value
+      })
+  }
+  
+  handleSubmit = () => {
+    console.log("I was clicked")
+    let { name, hp, front, back} = this.state
+    fetch("http://localhost:3000/pokemon", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        hp,
+        front,
+        back
+      })
+    })
+      .then(resp => resp.json())
+      .then(newPokemon => console.log(newPokemon))
+  }
+
+  
+  
   
   render() {
     console.log(this.state)
+    let { name, hp, front, back } = this.state
     return (
       <Container>
         <h1>Pokemon Searcher</h1>
         <br />
-        <PokemonForm />
+        <PokemonForm 
+          handleChange={this.handleChange} 
+          handleSubmit={this.handleSubmit}
+          name={name}
+          hp={hp}
+          fron={front}
+          back={back}/>
         <br />
         <Search searchPokemon={this.searchPokemon}/>
         <br />

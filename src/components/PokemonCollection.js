@@ -6,8 +6,9 @@ import { Card } from 'semantic-ui-react'
 
 class PokemonCollection extends React.Component {
   
-generatePokemonCard = (props) => {
+generatePokemonCard = () => {
   return this.props.pokemonData.map(pokemon => <PokemonCard
+   key={pokemon.id}
    name={pokemon.name}
    frontSprite={pokemon.sprites.front} 
    backSprite={pokemon.sprites.back}
