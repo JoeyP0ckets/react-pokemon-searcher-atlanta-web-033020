@@ -12,7 +12,7 @@ generatePokemonCard = () => {
    name={pokemon.name}
    frontSprite={pokemon.sprites.front} 
    backSprite={pokemon.sprites.back}
-   hp={pokemon.stats[5].value}
+   hp={pokemon.hp}
   />)
 }
   
@@ -20,7 +20,7 @@ generatePokemonCard = () => {
   
   
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <Card.Group itemsPerRow={6}>
         <h1>Hello From Pokemon Collection</h1>

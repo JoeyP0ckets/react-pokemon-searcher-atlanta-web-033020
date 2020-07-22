@@ -12,8 +12,10 @@ class PokemonPage extends React.Component {
     searchedPokemon: [],
     name: '',
     hp: '',
+    sprites: {
     front: '',
     back: ''
+    }
   }
   
   componentDidMount() {
@@ -41,10 +43,18 @@ class PokemonPage extends React.Component {
        [event.target.name]: event.target.value
       })
   }
+
+  handleSpritesChange = event => {
+    this.setState({
+      sprites: {
+        ...this.state.sprites,
+        [event.target.name]: event.target.value
+      }
+    })
+  }
   
   handleSubmit = () => {
-    console.log("I was clicked")
-    let { name, hp, front, back} = this.state
+    // console.log("I was clicked")
     fetch("http://localhost:3000/pokemon", {
       method: 'POST',
       headers: {
@@ -52,14 +62,17 @@ class PokemonPage extends React.Component {
         Accept: 'application/json'
       },
       body: JSON.stringify({
-        name,
-        hp,
-        front,
-        back
+        name: this.state.name,
+        hp: parseInt(this.state.hp),
+        sprites: this.state.sprites
       })
     })
       .then(resp => resp.json())
-      .then(newPokemon => console.log(newPokemon))
+      .then(newPokemon => {
+        this.setState({
+          searchedPokemon: [...this.state.searchedPokemon, newPokemon]
+        })
+      })
   }
 
   
@@ -67,7 +80,7 @@ class PokemonPage extends React.Component {
   
   render() {
     console.log(this.state)
-    let { name, hp, front, back } = this.state
+    let { name, hp, sprites} = this.state
     return (
       <Container>
         <h1>Pokemon Searcher</h1>
@@ -75,10 +88,11 @@ class PokemonPage extends React.Component {
         <PokemonForm 
           handleChange={this.handleChange} 
           handleSubmit={this.handleSubmit}
+          handleSpritesChange={this.handleSpritesChange}
           name={name}
           hp={hp}
-          fron={front}
-          back={back}/>
+          sprites={sprites}
+          />
         <br />
         <Search searchPokemon={this.searchPokemon}/>
         <br />

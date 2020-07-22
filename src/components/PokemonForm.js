@@ -11,8 +11,8 @@ import { Form } from 'semantic-ui-react'
           <Form.Group widths="equal">
             <Form.Input fluid type="text" onChange={props.handleChange} label="Name" placeholder="Name" name="name" value={props.name} />
             <Form.Input fluid type="text" onChange={props.handleChange} label="hp" placeholder="hp" name="hp" value={props.hp}/>
-            <Form.Input fluid type="text" onChange={props.handleChange} label="Front Image URL" placeholder="url" name="frontUrl" value={props.frontUrl}/>
-            <Form.Input fluid type="text" onChange={props.handleChange} label="Back Image URL" placeholder="url" name="backUrl" value={props.backUrl}/>
+            <Form.Input fluid type="text" onChange={props.handleSpritesChange} label="Front Image URL" placeholder="url" name="front" value={props.sprites.front}/>
+            <Form.Input fluid type="text" onChange={props.handleSpritesChange} label="Back Image URL" placeholder="url" name="back" value={props.sprites.back}/>
           </Form.Group>
           <Form.Button>Submit</Form.Button>
         </Form>
