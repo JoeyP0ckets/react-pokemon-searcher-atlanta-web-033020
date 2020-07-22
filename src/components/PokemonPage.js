@@ -63,14 +63,21 @@ class PokemonPage extends React.Component {
       },
       body: JSON.stringify({
         name: this.state.name,
-        hp: parseInt(this.state.hp),
+        hp: parseInt(this.state.hp, 10),
         sprites: this.state.sprites
       })
     })
       .then(resp => resp.json())
       .then(newPokemon => {
         this.setState({
-          searchedPokemon: [...this.state.searchedPokemon, newPokemon]
+          searchedPokemon: [...this.state.searchedPokemon, newPokemon],
+          name: '',
+          hp: '',
+          sprites: {
+          front: '',
+          back: ''
+    }
+
         })
       })
   }
